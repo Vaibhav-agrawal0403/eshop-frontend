@@ -47,7 +47,7 @@ import ProductReviews from "./component/Admin/ProductReviews.js";
 import Contact from "./component/layout/Contact/Contact.js";
 import About from "./component/layout/About/About.js";
 import NotFound from "./component/layout/Not Found/NotFound.js";
-
+// // "proxy": "http://192.168.219.1:4000",
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -55,7 +55,7 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/api/v1/stripeapikey`, { withCredentials: true });
     setStripeApiKey(data.stripeApiKey);
   }
   const stripePromise = loadStripe(stripeApiKey);

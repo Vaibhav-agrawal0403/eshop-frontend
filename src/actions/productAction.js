@@ -37,10 +37,10 @@ export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], ca
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST })
 
-        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+        let link = (`${process.env.REACT_APP_BACKEND_URI}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`, { withCredentials: true });
 
         if (category) {
-            link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+            link = (`${process.env.REACT_APP_BACKEND_URI}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`, { withCredentials: true });
         }
 
         const { data } = await axios.get(link)
@@ -62,7 +62,7 @@ export const getAdminProduct = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_PRODUCT_REQUEST });
 
-        const { data } = await axios.get("/api/v1/admin/products");
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/api/v1/admin/products`, { withCredentials: true });
 
         dispatch({
             type: ADMIN_PRODUCT_SUCCESS,
@@ -86,7 +86,7 @@ export const createProduct = (productData) => async (dispatch) => {
         };
 
         const { data } = await axios.post(
-            `/api/v1/admin/product/new`,
+            `${process.env.REACT_APP_BACKEND_URI}/api/v1/admin/product/new `, { withCredentials: true },
             productData,
             config
         );
@@ -113,7 +113,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
         };
 
         const { data } = await axios.put(
-            `/api/v1/admin/product/${id}`,
+            `${process.env.REACT_APP_BACKEND_URI}/api/v1/admin/product/${id}`, { withCredentials: true },
             productData,
             config
         );
@@ -135,7 +135,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST });
 
-        const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
+        const { data } = await axios.delete(`${process.env.REACT_APP_BACKEND_URI}/api/v1/admin/product/${id}`, { withCredentials: true });
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
@@ -155,7 +155,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`/api/v1/product/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/api/v1/product/${id}`, { withCredentials: true });
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -178,7 +178,7 @@ export const newReview = (reviewData) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
         };
 
-        const { data } = await axios.put(`/api/v1/review`, reviewData, config);
+        const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URI}/api/v1/review`, { withCredentials: true }, reviewData, config);
 
         dispatch({
             type: NEW_REVIEW_SUCCESS,
@@ -197,7 +197,7 @@ export const getAllReviews = (id) => async (dispatch) => {
     try {
         dispatch({ type: ALL_REVIEW_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/api/v1/reviews ? id = ${id}`, { withCredentials: true });
 
         dispatch({
             type: ALL_REVIEW_SUCCESS,
@@ -217,7 +217,7 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
         dispatch({ type: DELETE_REVIEW_REQUEST });
 
         const { data } = await axios.delete(
-            `/api/v1/reviews?id=${reviewId}&productId=${productId}`
+            `${process.env.REACT_APP_BACKEND_URI}/api/v1/reviews ? id = ${reviewId} & productId=${productId}`, { withCredentials: true }
         );
 
         dispatch({
