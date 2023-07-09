@@ -104,8 +104,10 @@ const Payment = () => {
                 }
             }
         } catch (error) {
+            // console.log(JSON.stringify(error))
             payBtn.current.disabled = false;
-            alert.error(error.response.data.message);
+            // alert.error(error);
+            // alert.error(error.response.data.message);
         }
     };
 

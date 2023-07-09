@@ -167,7 +167,7 @@ function App() {
           <Route exact path="/admin/reviews" element={<ProductReviews />} />
         </Route>
 
-        <Route element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
       <Footer />
